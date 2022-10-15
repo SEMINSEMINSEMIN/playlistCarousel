@@ -62,8 +62,11 @@
                 'onStateChange': function onStateChange(event){
                     if (event.data == 0){
                         // event.target.seekTo(0);
+                        // event.target.stopVideo();
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
@@ -86,8 +89,11 @@
                 'onStateChange': function onStateChange(event){
                     if (event.data == 0){
                         // event.target.seekTo(0);
+                        // event.target.stopVideo();
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
@@ -105,17 +111,20 @@
                         startSeconds: 44,
                         endSeconds: 60
                     })
-                }
-            }, 
+                },
 
-            'onStateChange': function onStateChange(event){
+                'onStateChange': function onStateChange(event){
                     if (event.data == 0){
                         // event.target.seekTo(0);
+                        // event.target.stopVideo();
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
-        });
+            }
+            });
 
         player3 = new YT.Player('player3', {
             video: 'zC8RrOA0spo',
@@ -126,16 +135,18 @@
                 'onReady': function onReady(event){
                     event.target.loadVideoById({
                         videoId: 'zC8RrOA0spo',
-                        startSeconds: 53,
+                        startSeconds: 65,
                         endSeconds: 104
                     })
-                },
+                }, 
 
                 'onStateChange': function onStateChange(event){
                     if (event.data == 0){
                         // event.target.seekTo(0);
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
@@ -160,6 +171,8 @@
                         // event.target.seekTo(0);
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
@@ -184,6 +197,8 @@
                         // event.target.seekTo(0);
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
@@ -208,25 +223,12 @@
                         // event.target.seekTo(0);
                         currAngle -= angle;
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+                        event.target.seekTo(0);
+                        event.target.pauseVideo();
                     }
                 }
             }
         });
     }
-
-    // const center = document.querySelector('.list-item');
-    // const items = document.querySelectorAll('.list-item li');
-    // const angle = 360 / items.length;
-    // let currAngle = 0;
-
-    // document.addEventListener('click', function (event) {
-    //     if (window.innerWidth / 2 < event.clientX) {
-    //         currAngle -= angle;
-    //     } else {
-    //         currAngle += angle;
-    //     }
-
-    //     center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-    // })
 </script>
 </html>
