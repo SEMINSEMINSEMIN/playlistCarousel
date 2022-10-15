@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./normalize.css">
+    <title></title>
+</head>
+<body>
+    <article id="app">
+        <h2 class="text-hidden">플레이 리스트</h2>
+        <ul class="list-item">
+            <li><div id="player0"></div></li>
+            <li><div id="player1"></div></li>
+            <li><div id="player2"></div></li>
+            <li><div id="player3"></div></li>
+        </ul>
+    </article>
+</body>
+<script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player0, player1, player2;
+    function onYouTubeIframeAPIReady(){
+        player0 = new YT.Player('player0', {
+            videoId: 'Aq_gsctWHtQ',
+            height: '360',
+            width: '400',
+            events: {
+                'onReady': function onReady(event){
+                    event.target.loadVideoById({
+                        videoId: 'Aq_gsctWHtQ',
+                        startSeconds: 55,
+                        endSeconds: 85
+                    })
+                }
+            }
+        });
+
+        player1 = new YT.Player('player1', {
+            videoId: 'PfpERIQXIrk',
+            height: '360',
+            width: '400',
+            events: {
+                'onReady': function onReady(event){
+                    event.target.loadVideoById({
+                        videoId: 'PfpERIQXIrk',
+                        startSeconds: 74,
+                        endSeconds: 102
+                    })
+                }
+            }
+        });
+
+        player2 = new YT.Player('player2', {
+            video: 'vFuU4rIZZ30',
+            height: '360',
+            width: '400',
+            events: {
+                'onReady': function onReady(event){
+                    event.target.loadVideoById({
+                        videoId: 'vFuU4rIZZ30',
+                        startSeconds: 44,
+                        endSeconds: 60
+                    })
+                }
+            }
+        });
+
+        player4 = new YT.Player('player3', {
+            video: 'zC8RrOA0spo',
+            height: '360',
+            width: '400',
+            events: {
+                'onReady': function onReady(event){
+                    event.target.loadVideoById({
+                        videoId: 'zC8RrOA0spo',
+                        startSeconds: 53,
+                        endSeconds: 104
+                    })
+                }
+            }
+        })
+    }
+</script>
+</html>
