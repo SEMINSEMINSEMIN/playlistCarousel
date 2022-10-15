@@ -36,8 +36,22 @@
     document.addEventListener('click', function (event) {
         if (window.innerWidth / 2 < event.clientX) {
             currAngle -= angle;
+            player0.pauseVideo();
+            player1.pauseVideo();
+            player2.pauseVideo();
+            player3.pauseVideo();
+            player4.pauseVideo();
+            player5.pauseVideo();
+            player6.pauseVideo();
         } else {
             currAngle += angle;
+            player0.pauseVideo();
+            player1.pauseVideo();
+            player2.pauseVideo();
+            player3.pauseVideo();
+            player4.pauseVideo();
+            player5.pauseVideo();
+            player6.pauseVideo();
         }
 
         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
