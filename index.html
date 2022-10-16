@@ -50,10 +50,6 @@
     // 비디오 삽입
     const playerList = [];
 
-    function stopVideo() {
-        player.stopVideo();
-      }
-
     function onYouTubeIframeAPIReady(){
         for (let i = 0; i < videoInfoData.length; i++){
             const nowVideo = videoInfoData[i];
@@ -67,6 +63,11 @@
                     'onStateChange': function onStateChange(event){
                         if (event.data == 1 && !done){
                             event.target.seekTo(nowVideo.$startSeconds);
+                            const timeDiff = (nowVideo.$endSeconds - nowVideo.$startSeconds) * 1000;
+                            function stopVideo(){
+                                event.target.stopVideo();
+                            }
+                            setTimeout(stopVideo, timeDiff);
                             done = true;
                         }
                     }
