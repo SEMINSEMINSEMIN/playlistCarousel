@@ -58,7 +58,7 @@
             new Players('player5', 'ty8fr7vmedg', 72, 101),
             new Players('player6', 'DJ4Zda11iSo', 52, 100)
         ];
-    
+
         // 비디오 삽입
         const playerList = [];
     
@@ -81,6 +81,8 @@
                                     event.target.stopVideo();
                                 }
     
+                                setTimeout(stopVideo, timeDiff);
+    
                                 function afterMusicLocation(){
                                     const nowCurrAngle = currAngle;
                                     currAngle -= angle;
@@ -91,12 +93,9 @@
                                     center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
                                 }
                                 // 얘도 turnLocation 사용하고 싶은데 안 됨.. 이유를 모르겠음 ㅠ
-                                // 그리고 일시중지하면 넘어가버리는 문제..
-                                setTimeout(stopVideo, timeDiff);
                                 setTimeout(afterMusicLocation, timeDiff + 1);
-
+    
                                 done = true;
-                            
                             } else if (event.data == 0){
                                 const nowCurrAngle = currAngle;
                                 currAngle -= angle;
