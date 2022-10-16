@@ -23,241 +23,48 @@
     </article>
 </body>
 <script>
+    // API 불러오기
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    const center = document.querySelector('.list-item');
-    const items = document.querySelectorAll('.list-item li');
-    const angle = 360 / items.length;
-    let currAngle = 0;
+    // 비디오 데이터
+    function Players(playerName, videoId, $startSeconds, $endSeconds){
+        this.playerName = playerName;
+        this.$videoId = videoId;
+        this.$startSeconds = $startSeconds;
+        this.$endSeconds = $endSeconds;
+    }
 
-    document.addEventListener('click', function (event) {
-        if (window.innerWidth / 2 < event.clientX) {
-            currAngle -= angle;
-            player0.pauseVideo();
-            player1.pauseVideo();
-            player2.pauseVideo();
-            player3.pauseVideo();
-            player4.pauseVideo();
-            player5.pauseVideo();
-            player6.pauseVideo();
-        } else {
-            currAngle += angle;
-            player0.pauseVideo();
-            player1.pauseVideo();
-            player2.pauseVideo();
-            player3.pauseVideo();
-            player4.pauseVideo();
-            player5.pauseVideo();
-            player6.pauseVideo();
-        }
+    const videoInfoData = [
+        new Players('player0', 'Aq_gsctWHtQ', 55, 85),
+        new Players('player1', 'PfpERIQXIrk', 74, 102),
+        new Players('player2', 'vFuU4rIZZ30', 44, 60),
+        new Players('player3', 'zC8RrOA0spo', 65, 104),
+        new Players('player4', 'hoknJbAsOZY', 65, 87),
+        new Players('player5', 'ty8fr7vmedg', 72, 101),
+        new Players('player6', 'DJ4Zda11iSo', 52, 100)
+    ];
 
-        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-    })
+    // 비디오 삽입
+    const playerList = [];
 
-    var player0, player1, player2, player3, player4, player5, player6;
     function onYouTubeIframeAPIReady(){
-        player0 = new YT.Player('player0', {
-            videoId: 'Aq_gsctWHtQ',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                            videoId: 'Aq_gsctWHtQ',
-                            startSeconds: 55,
-                            endSeconds: 85,
-                            suggestedQuality: 'small'
-                        })
-                },
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        // event.target.seekTo(0);
-                        // event.target.stopVideo();
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(86);
-                        event.target.pauseVideo();
-                    } else if (event.data == 1 && !done){
-                        event.target.loadVideoById({
-                            videoId: 'Aq_gsctWHtQ',
-                            startSeconds: 55,
-                            endSeconds: 85,
-                            suggestedQuality: 'small'
-                        })
-                    }
-                }
-            }
-        });
-
-        player1 = new YT.Player('player1', {
-            videoId: 'PfpERIQXIrk',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'PfpERIQXIrk',
-                        startSeconds: 74,
-                        endSeconds: 102,
-                        suggestedQuality: 'small'
-                    })
-                    // event.target.pauseVideo();
-                },
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(103);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-        });
-
-        player2 = new YT.Player('player2', {
-            video: 'vFuU4rIZZ30',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'vFuU4rIZZ30',
-                        startSeconds: 44,
-                        endSeconds: 60,
-                        suggestedQuality: 'small'
-                    })
-                    // event.target.pauseVideo();
-                },
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        // event.target.seekTo(0);
-                        // event.target.stopVideo();
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(61);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-            });
-
-        player3 = new YT.Player('player3', {
-            video: 'zC8RrOA0spo',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'zC8RrOA0spo',
-                        startSeconds: 65,
-                        endSeconds: 104,
-                        suggestedQuality: 'small'
-                    })
-                    // event.target.pauseVideo();
-                }, 
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        // event.target.seekTo(0);
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(105);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-        });
-
-        player4 = new YT.Player('player4', {
-            video: 'hoknJbAsOZY',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'hoknJbAsOZY',
-                        startSeconds: 65,
-                        endSeconds: 87,
-                        suggestedQuality: 'hd720'
-                    })
-                    // event.target.pauseVideo();
-                }, 
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(88);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-        });
-
-        player5 = new YT.Player('player5', {
-            video: 'ty8fr7vmedg',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'ty8fr7vmedg',
-                        startSeconds: 72,
-                        endSeconds: 101,
-                        suggestedQuality: 'hd720'
-                    })
-                }, 
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(102);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-        });
-
-        player6 = new YT.Player('player6', {
-            video: 'DJ4Zda11iSo',
-            width: '400',
-            height: '360',
-            playerVars: { 'autoplay': 0, 'controls': 1 },
-            events: {
-                'onReady': function onReady(event){
-                    event.target.loadVideoById({
-                        videoId: 'DJ4Zda11iSo',
-                        startSeconds: 52,
-                        endSeconds: 100,
-                        suggestedQuality: 'hd720'
-                    })
-                    // event.target.pauseVideo();
-                }, 
-
-                'onStateChange': function onStateChange(event){
-                    if (event.data == 0){
-                        // event.target.seekTo(0);
-                        currAngle -= angle;
-                        center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                        event.target.seekTo(101);
-                        event.target.pauseVideo();
-                    }
-                }
-            }
-        });
+        for (let i = 0; i < videoInfoData.length; i++){
+            const nowVideo = videoInfoData[i];
+            playerList.push(new YT.Player(nowVideo.playerName, {
+                videoId: nowVideo.$videoId,
+                width: '400',
+                height: '360',
+                playerVars: {'autoplay': 0}
+            }));
+        }
+        // 자동재생 문제
+        const iframes = document.querySelectorAll('iframe');
+        for (let iframe of document.querySelectorAll('iframe')){
+            iframe.setAttribute('allow', "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+        }
     }
 </script>
 </html>
