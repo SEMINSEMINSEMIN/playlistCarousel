@@ -96,13 +96,23 @@
     // 휠 돌아가게
     document.addEventListener('click', function(event){
         if (window.innerWidth / 2 < event.clientX){
+            const nowCurrAngle = currAngle;
             currAngle -= angle;
             playerList.map(i => i.pauseVideo());
+            center.animate([
+                {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
+                {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
+            ], {duration: 800, easing: "ease"});
         } else {
+            const nowCurrAngle = currAngle;
             currAngle += angle;
             playerList.map(i => i.pauseVideo());
+            center.animate([
+                {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
+                {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
+            ], {duration: 1000, easing: "ease"});
         }
-
+        
         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
     })
 </script>
