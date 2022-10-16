@@ -82,6 +82,13 @@
                         center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
                         event.target.seekTo(86);
                         event.target.pauseVideo();
+                    } else if (event.data == 1 && !done){
+                        event.target.loadVideoById({
+                            videoId: 'Aq_gsctWHtQ',
+                            startSeconds: 55,
+                            endSeconds: 85,
+                            suggestedQuality: 'small'
+                        })
                     }
                 }
             }
