@@ -54,17 +54,25 @@
         for (let i = 0; i < videoInfoData.length; i++){
             const nowVideo = videoInfoData[i];
             playerList.push(new YT.Player(nowVideo.playerName, {
-                videoId: nowVideo.$videoId,
                 width: '400',
                 height: '360',
-                playerVars: {'autoplay': 0}
-            }));
-        }
+                playerVars: {'autoplay': 0},
+                events: {
+                    'onReady': function onReady(event){
+                        event.target.loadVideoById({
+                            videoId: nowVideo.$videoId,
+                            startSeconds: nowVideo.$startSeconds,
+                            endSeconds: nowVideo.$endSeconds,
+                            suggestedQuality: 'small'
+                        })
+                    }
+                }
+            }))}}
+
         // 자동재생 문제
         const iframes = document.querySelectorAll('iframe');
         for (let iframe of document.querySelectorAll('iframe')){
             iframe.setAttribute('allow', "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
         }
-    }
 </script>
 </html>
