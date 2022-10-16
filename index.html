@@ -67,12 +67,10 @@
                         })
                     }
                 }
-            }))}}
-
-        // 자동재생 문제
-        const iframes = document.querySelectorAll('iframe');
-        for (let iframe of document.querySelectorAll('iframe')){
-            iframe.setAttribute('allow', "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-        }
+            }))
+            // 자동재생 문제
+            let thisIframe = document.getElementById(nowVideo.playerName);
+            thisIframe.setAttribute('allow', "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+        }}
 </script>
 </html>
