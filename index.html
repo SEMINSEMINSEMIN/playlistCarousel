@@ -93,9 +93,13 @@
                                     center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
                                 }
                                 // 얘도 turnLocation 사용하고 싶은데 안 됨.. 이유를 모르겠음 ㅠ
-                                setTimeout(afterMusicLocation, timeDiff + 1);
+                                
+                                if (event.data != 2) {
+                                    setTimeout(afterMusicLocation, timeDiff + 1);
+                                    done = true;
+                                }
     
-                                done = true;
+                                
                             } else if (event.data == 0){
                                 const nowCurrAngle = currAngle;
                                 currAngle -= angle;
