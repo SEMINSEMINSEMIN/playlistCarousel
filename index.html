@@ -50,21 +50,25 @@
     // 비디오 삽입
     const playerList = [];
 
+    function stopVideo() {
+        player.stopVideo();
+      }
+
     function onYouTubeIframeAPIReady(){
         for (let i = 0; i < videoInfoData.length; i++){
             const nowVideo = videoInfoData[i];
+            let done = false;
             playerList.push(new YT.Player(nowVideo.playerName, {
+                videoId: nowVideo.$videoId,
                 width: '400',
                 height: '360',
                 playerVars: {'autoplay': 0},
                 events: {
-                    'onReady': function onReady(event){
-                        event.target.loadVideoById({
-                            videoId: nowVideo.$videoId,
-                            startSeconds: nowVideo.$startSeconds,
-                            endSeconds: nowVideo.$endSeconds,
-                            suggestedQuality: 'small'
-                        })
+                    'onStateChange': function onStateChange(event){
+                        if (event.data == 1 && !done){
+                            event.target.seekTo(nowVideo.$startSeconds);
+                            done = true;
+                        }
                     }
                 }
             }))
