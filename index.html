@@ -70,17 +70,17 @@
                     videoId: nowVideo.$videoId,
                     width: '400',
                     height: '360',
-                    playerVars: {'autoplay': 0},
+                    playerVars: {'autoplay': 0, 'controls': 0},
                     events: {
+                        'onReady': function onReady(event){
+                            event.target.cueVideoById({
+                                videoId: nowVideo.$videoId,
+                                startSeconds: nowVideo.$startSeconds,
+                                endSeconds: nowVideo.$endSeconds
+                            })
+                        },
                         'onStateChange': function onStateChange(event){
-                            if (event.data == 1 && !done){
-                                event.target.cueVideoById({
-                                    videoId: nowVideo.$videoId,
-                                    startSeconds: nowVideo.$startSeconds,
-                                    endSeconds: nowVideo.$endSeconds,
-                                })
-                                done = true;
-                            } else if (event.data == 0){
+                             if (event.data == 0){
                                 const nowCurrAngle = currAngle;
                                 currAngle -= angle;
                                 center.animate([
@@ -88,7 +88,8 @@
                                     {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
                                 ], {duration: 1000, easing: "ease"});
                                 center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                                // event.target.stopVideo();
+                                event.target.seekTo(nowVideo.$startSeconds);
+                                event.target.pauseVideo();
                             }
                         }
                     }
