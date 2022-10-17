@@ -83,11 +83,8 @@
                              if (event.data == 0){
                                 const nowCurrAngle = currAngle;
                                 currAngle -= angle;
-                                center.animate([
-                                    {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
-                                    {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
-                                ], {duration: 1000, easing: "ease"});
-                                center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+
+                                turnLocation(currAngle, nowCurrAngle);
                                 event.target.seekTo(nowVideo.$startSeconds);
                                 event.target.pauseVideo();
                             }
