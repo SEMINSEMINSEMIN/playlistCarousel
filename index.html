@@ -81,20 +81,7 @@
                                     event.target.stopVideo();
                                 }
     
-                                setTimeout(stopVideo, timeDiff);
-    
-                                function afterMusicLocation(){
-                                    const nowCurrAngle = currAngle;
-                                    currAngle -= angle;
-                                    center.animate([
-                                        {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
-                                        {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
-                                    ], {duration: 1000, easing: "ease"});
-                                    center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                                }
-                                // 얘도 turnLocation 사용하고 싶은데 안 됨.. 이유를 모르겠음 ㅠ
-                                setTimeout(afterMusicLocation, timeDiff + 1);
-    
+                                setTimeout(stopVideo, timeDiff);    
                                 done = true;
                             } else if (event.data == 0){
                                 const nowCurrAngle = currAngle;
