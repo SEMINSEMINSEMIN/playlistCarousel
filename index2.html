@@ -74,11 +74,14 @@
                     events: {
                         'onStateChange': function onStateChange(event){
                             if (event.data == 1 && !done){
-                                event.target.cueVideoById({
-                                    videoId: nowVideo.$videoId,
-                                    startSeconds: nowVideo.$startSeconds,
-                                    endSeconds: nowVideo.$endSeconds,
-                                })
+                                event.target.seekTo(nowVideo.$startSeconds);
+                                const timeDiff = (nowVideo.$endSeconds - nowVideo.$startSeconds) * 1000;
+
+                                function stopVideo(){
+                                    event.target.stopVideo();
+                                }
+
+                                setTimeout(stopVideo, timeDiff);    
                                 done = true;
                             } else if (event.data == 0){
                                 const nowCurrAngle = currAngle;
@@ -88,7 +91,7 @@
                                     {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
                                 ], {duration: 1000, easing: "ease"});
                                 center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-                                // event.target.stopVideo();
+                                event.target.stopVideo();
                             }
                         }
                     }
