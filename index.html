@@ -12,34 +12,16 @@
     <article id="app">
         <h2 class="text-hidden">플레이 리스트</h2>
         <ul class="list-item">
-            <li><div id="player0"></div></li>
-            <li><div id="player1"></div></li>
-            <li><div id="player2"></div></li>
-            <li><div id="player3"></div></li>
-            <li><div id="player4"></div></li>
-            <li><div id="player5"></div></li>
-            <li><div id="player6"></div></li>
         </ul>
     </article>
     <script>
+        const listUl = document.querySelector('.list-item');
+
         // API 불러오기
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-        // 휠 변수
-        const center = document.querySelector('.list-item');
-        const items = center.querySelectorAll('li');
-        const angle = 360 / items.length;
-        let currAngle = 0;
-        function turnLocation(currAngle, nowCurrAngle){
-            center.animate([
-                {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
-                {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
-            ], {duration: 1000, easing: "ease"});
-            center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
-        }
     
         // 비디오 데이터
         function Players(playerName, videoId, $startSeconds, $endSeconds){
@@ -58,6 +40,27 @@
             new Players('player5', 'ty8fr7vmedg', 72, 101),
             new Players('player6', 'DJ4Zda11iSo', 52, 100)
         ];
+        
+        videoInfoData.forEach(i => {
+            const li = document.createElement('li');
+            const videoArea = document.createElement('div');
+            videoArea.id = i.playerName;
+            li.appendChild(videoArea);
+            listUl.appendChild(li);
+        })
+        
+        // 휠 변수
+        const center = document.querySelector('.list-item');
+        const items = center.querySelectorAll('li');
+        const angle = 360 / items.length;
+        let currAngle = 0;
+        function turnLocation(currAngle, nowCurrAngle){
+            center.animate([
+                {transform: `translate(-50%, -50%) rotateY(${nowCurrAngle}deg)`},
+                {transform: `translate(-50%, -50%) rotateY(${currAngle}deg)`}
+            ], {duration: 1000, easing: "ease"});
+            center.style.transform = `translate(-50%, -50%) rotateY(${currAngle}deg)`;
+        }
 
         // 비디오 삽입
         const playerList = [];
